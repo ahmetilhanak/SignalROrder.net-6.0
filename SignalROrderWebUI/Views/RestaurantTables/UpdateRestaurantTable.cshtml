@@ -1,0 +1,38 @@
+﻿@model UpdateRestaurantTableVM
+@{
+    ViewData["Title"] = "UpdateRestaurantTable";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Restaurant Table</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Restaurant Table Update</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="RestaurantTableID" type="text" class="form-control" id="featurid" hidden />
+                            <div class="form-group">
+                                <label>Table Name</label>
+                                <input asp-for="Name" type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label>Status</label>
+                                <input asp-for="Status" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="RestaurantTables" asp-action="UpdateRestaurantTable" class="btn btn-primary">Update Table</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

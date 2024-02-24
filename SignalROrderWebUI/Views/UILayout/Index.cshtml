@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = null;
+    var className = "";
+    var controllerName = ViewContext.RouteData.Values["controller"].ToString();
+    if (controllerName != "Default")
+    {
+        className = "sub_page";
+    }
+}
+
+
+@* UI Layout *@
+
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+
+<body class="@className">
+
+    @await Component.InvokeAsync("_UILayoutNavBarComponentPartial")
+
+    @RenderBody()
+   
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+
+    @await Component.InvokeAsync("_UILayoutScriptComponentPartial")
+    
+</body>
+
+</html>

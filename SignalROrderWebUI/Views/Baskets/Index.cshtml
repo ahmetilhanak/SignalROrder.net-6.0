@@ -1,0 +1,97 @@
+﻿@model List<ResultBasketWithProductVM>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+    var count = 0;
+    decimal basketTotalPrice = Model.Sum(z=>z.Price);
+    decimal basketTaxValue = 20;
+    decimal basketTotalPriceWithTax = ((basketTotalPrice * basketTaxValue)/100)+basketTotalPrice;
+}
+@* <script src="~/js/basket.js"></script> *@
+<br />
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-dark mb-30">
+                <a class="breadcrumb-item text-white" asp-controller="Default" asp-action="Index">Main Page</a>
+                <a class="breadcrumb-item text-white" asp-controller="Menu" asp-action="Index">Menu</a>
+                <span class="breadcrumb-item active" ">Your Basket</span>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-8 table-responsive mb-5">
+            <table class="table table-light table-borderless table-hover text-center mb-0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Count</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                @foreach (var item in Model)
+                {
+                    count++;                   
+                    <tr>
+                            <td class="align-middle">@count</td>
+                            <td class="align-middle">@item.ProductName</td>
+                            <td class="align-middle">@item.Count</td>
+                            <td class="align-middle">@item.Price</td>
+                            <td class="align-middle">@item.TotalPrice</td>
+                            <td class="align-middle btn-delete"><a class="btn btn-sm btn-danger" href="/Baskets/DeleteBasket/@item.BasketID"><i class="fa fa-times"></i></a></td>
+                            @* <td class="align-middle btn-delete"><a class="btn btn-sm btn-danger" href="#" onclick="deleteProduct(@item.BasketID)"><i class="fa fa-times"></i></a></td> *@
+                                              
+                        </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-log-4">
+            <form>
+                <div class="input-group">
+                    <input type="text" id="couponcode" class="form-control border-1 p-4" placeholder="Your Coupon Code" />
+                    <div>
+                        <a style="height:48px;padding-top:11px; margin-left:2px;" class="btn btn-warning" id="btncouponcode">Apply the Coupon</a>
+                    </div>
+                </div>
+            </form>
+            <br/>
+            <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-warning pr-3">Basket Summary</span></h5>
+            <div class="bg-light p-30 mb-5" style="padding:10px">
+                <div id="container" class="border-bottom pb-2">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h6>Total Amount</h6>
+                        <h6><span id="totalprice">@basketTotalPrice ₺</span></h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Task Percent</h6>
+                        <h6 id="kdv" class="font-weight-medium">@basketTaxValue %</h6>
+                    </div>   
+                    <br/>
+                </div>
+                <div class="pt-2">
+                    <div class="d-flex justify-content-between" mt-2>
+                        <h5>Task Amount with Task</h5>
+                        <h5 id="totalpricewithkdv">@basketTotalPriceWithTax ₺</h5>
+                    </div>
+                    <br />
+                    <buttton id="btnchecked" class="btn btn-block btn-warning font-weight-bold my-3">Pay</buttton>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+  

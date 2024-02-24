@@ -1,0 +1,52 @@
+﻿@model UpdateTestimonialVM
+@{
+    ViewData["Title"] = "UpdateTestimonial";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Testimonial</h4>
+        <div class="row">
+            <div class="col-md-12">
+
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Testimonial Update</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="TestimonialID" type="text" class="form-control" id="testimonialid" hidden>
+                            <div class="form-group">
+                                <label for="testimonialname">Name</label>
+                                <input asp-for="Name" type="text" class="form-control" id="testimonialname">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="testimonialtitle">Title</label>
+                                <input asp-for="Title" type="text" class="form-control" id="testimonialtitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="testimonialcomment">Comment</label>
+                                <input asp-for="Comment" type="text" class="form-control" id="testimonialcomment">
+                            </div>
+                            <div class="form-group">
+                                <label for="testimonialimageurl">Image Url</label>
+                                <input asp-for="ImageUrl" type="text" class="form-control" id="testimonialimageurl">
+                            </div>
+                            <div class="form-group">
+                                <label for="testimonialstatus">Status</label>
+                                <input asp-for="Status" type="text" class="form-control" id="testimonialstatus">
+                            </div>
+
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Testimonial" asp-action="UpdateTestimonial" class="btn btn-primary">Update Testimonial</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

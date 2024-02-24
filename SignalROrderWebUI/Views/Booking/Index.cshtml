@@ -1,0 +1,126 @@
+﻿@model List<ResultBookingVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<div class="content">
+    <div class="container-fluid">
+
+        <script type="text/javascript">
+
+            $(document).ready(() => {
+
+                var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7260/SignalRHub").build();
+
+                $("#connstatus").text(connection.state);
+
+                connection.start().then(() => {
+                    $("#connstatus").text(" " + connection.state);
+                    console.log("connection status = " + connection.state);
+                    if (connection.state == "Connected") {
+                        console.log("It is connected to SignalR HUB");
+                        $("#connstatus").css('color', 'green');
+                        
+                    }
+                    setInterval(() => {
+                        connection.invoke("GetBookingList");
+                    }, 1000);    //  time = 1sn
+
+                }).catch((err) => { console.log(err) });
+
+                connection.on("ReceiveBookingList", (value) => {
+                    //console.log(value);
+                    $("#bookingList").empty();
+                                      
+                    // value.forEach((item, index) => {
+                    $.each(value,(index, item) => {
+                        let counter = 0;
+                        counter = index + 1;
+                        //$("#bookinglist").append(`<tr>< td >${index}</td>< td > ${item.name}</td>< td > ${item.phone}</td>< td > ${item.mail}</td>< td > ${item.personCount}</td>< td > ${item.date}</td>< td > <a class="btn btn-outline - danger" href="/Booking/DeleteBooking/${item.bokingID}" > Delete < /a></td ><td><a class="btn btn - outline - success" href="/Booking/UpdateBooking/${item.bokingID}"> Update < /a></td ></tr>`)                    
+                        
+                        $("#bookingList").append(
+                            "<tr>\n" +
+                            `  <th>${counter}</th>\n` +
+                            `  <td>${item.name}</td>\n` +
+                            `  <td>${item.phone}</td>\n` +
+                            `  <td>${item.mail}</td>\n` +
+                            `  <td>${item.personCount}</td>\n` +
+                            `  <td>${item.date}</td>\n` +
+                            `  <td>${item.description}</td>\n` +
+                            `  <td><a class="btn btn-outline-danger" href="/Booking/DeleteBooking/${item.bookingID}">Delete</a></td>\n` +
+                            `  <td><a class="btn btn-outline-success" href="/Booking/UpdateBooking/${item.bookingID}">Update</a></td>\n` +
+                            `  <td><a class="btn btn-outline-info" href="/Booking/ApproveBooking/${item.bookingID}">Confirm</a></td>\n` +
+                            `  <td><a class="btn btn-outline-dark" href="/Booking/CancelBooking/${item.bookingID}">Cancel</a></td>\n` +
+                            "</tr>\n"
+                        );
+                    })
+
+                });
+
+            });
+        </script>
+
+        <h4 class="page-title">Booking</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Booking List <span> - SignalR Hub Connection Status :</span><span id="connstatus" style="color:red"></span></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            You can do proceesses for Booking from below.
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Phone</th>
+                                    <th scope="col">Mail</th>
+                                    <th scope="col">Person Count</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Confirm</th>
+                                    <th scope="col">Cancel</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bookingList">
+                                @*   @foreach (var item in Model)
+                                {
+                                count++;
+                                <tr >
+                                <td>@count</td>
+                                <td>@item.Name</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Mail</td>
+                                <td>@item.PersonCount</td>
+                                <td>@item.Date</td>
+                                <td><a class="btn btn-outline-danger" asp-controller="Booking" asp-action="DeleteBooking" asp-route-id=@item.BookingID>Delete</a></td>
+                                <td><a class="btn btn-outline-success" asp-controller="Booking" asp-action="UpdateBooking" asp-route-id=@item.BookingID>Update</a></td>
+
+                                </tr>
+                                } *@
+
+                            </tbody>
+
+                        </table>
+                        <a asp-controller="Booking" asp-action="CreateBooking" class="btn btn-outline-primary">Add New Booking</a>
+                      @*   <div class="col-md-8">
+                            <ul class="list-group" id="bookingList"></ul>
+                        </div> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

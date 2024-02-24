@@ -1,0 +1,50 @@
+﻿@model UpdateNotificationVM
+@{
+    ViewData["Title"] = "UpdateNotification";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Notification</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Update Notification</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="NotificationID" type="text" class="form-control" id="featurid" hidden/>
+                            <div class="form-group">
+                                <label for="bookingmail">Description</label>
+                                <input asp-for="Description" type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingname">Icon</label>
+                                <input asp-for="Icon" type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingphone">Type</label>
+                                <input asp-for="Type" type="text" class="form-control">
+                            </div>
+                           
+                            <div class="form-group">
+                                <label for="bookingmail">Date</label>
+                                <input asp-for="Date" type="text" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingmail">Status</label>
+                                <input asp-for="Status" type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Notifications" asp-action="UpdateNotification" class="btn btn-primary">Update Notification</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

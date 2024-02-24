@@ -1,0 +1,51 @@
+﻿@model UpdateDiscountVM
+@{
+    ViewData["Title"] = "UpdateDiscount";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Discount</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Discount Update</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="DiscountID" type="text" class="form-control" id="discountid" hidden>
+                            <div class="form-group">
+                                <label for="discounttitle">Title</label>
+                                <input asp-for="Title" type="text" class="form-control" id="discounttitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="discountamount">Amount</label>
+                                <input asp-for="Amount" type="text" class="form-control" id="discountamount">
+                            </div>
+                            <div class="form-group">
+                                <label for="discountdescription">Description</label>
+                                <input asp-for="Description" type="text" class="form-control" id="discountdescription" />
+                            </div>
+                            <div class="form-group">
+                                <label for="discountimageurl">Image Url</label>
+                                <input asp-for="ImageUrl" type="text" class="form-control" id="discountimageurl" />
+                            </div>
+                            <div class="form-group">
+                                <label for="discountimageurl">Status</label>
+                                <input asp-for="Status" type="text" class="form-control" id="discountstatus" />
+                            </div>
+
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Discount" asp-action="UpdateDiscount" class="btn btn-primary">Update Discount</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,61 @@
+﻿@model List<ResultRestaurantTableVM>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+	var count = 0;
+}
+
+
+
+<div class="content">
+
+
+
+	<div class="container-fluid">
+		<h4 class="page-title">Restaurant Table</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Restaurant Table List </div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							You can do proceesses about Restaurant Table from below
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Name</th>
+									<th scope="col">Status</th>
+									<th scope="col">Delete</th>
+									<th scope="col">Update</th>
+									
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									count++;
+									<tr>
+										<td>@count</td>
+										<td>@item.Name</td>
+										<td>@item.Status</td>
+										<td><a class="btn btn-outline-danger" asp-controller="RestaurantTables" asp-action="DeleteRestaurantTable" asp-route-id=@item.RestaurantTableID>Delete</a></td>
+										<td><a class="btn btn-outline-success" asp-controller="RestaurantTables" asp-action="UpdateRestaurantTable" asp-route-id=@item.RestaurantTableID>Update</a></td>
+
+									</tr>
+								}
+
+							</tbody>
+						</table>
+						<a asp-controller="RestaurantTables" asp-action="CreateRestaurantTable" class="btn btn-outline-primary">Add New Notification</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

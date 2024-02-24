@@ -1,0 +1,76 @@
+﻿@model CreateBookingVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/UILayout/Index.cshtml";
+}
+
+
+@* @await Component.InvokeAsync("_BookATableSectionComponentPartial") *@
+
+<!-- book section -->
+<section class="book_section layout_padding">
+    <div class="container">
+        <div class="heading_container">
+            <h2>
+                Book A Table
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form_container">
+                    <form method="post">
+                        <div>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Your Name" />
+                        </div>
+                        <div>
+                            <input asp-for="Phone" type="text" class="form-control" placeholder="Phone Number" />
+                        </div>
+                        <div>
+                            <input asp-for="Mail" type="email" class="form-control" placeholder="Your Email" />
+                        </div>
+                        <div>
+                            <select asp-for="PersonCount" class="form-control nice-select wide">
+                                <option value="" disabled selected>
+                                    How many persons?
+                                </option>
+                                <option value="1">
+                                    1
+                                </option>
+                                <option value="2">
+                                    2
+                                </option>
+                                <option value="3">
+                                    3
+                                </option>
+                                <option value="4">
+                                    4
+                                </option>
+                                <option value="5">
+                                    5
+                                </option>
+                                <option value="6">
+                                    6+
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <input asp-for="Date" type="date" class="form-control">
+                        </div>
+                        <div class="btn_box">
+                            <button asp-controller="BookATable" asp-action="Index">
+                                Book Now
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="map_container ">
+                    <div id="googleMap"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end book section -->

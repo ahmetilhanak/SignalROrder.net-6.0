@@ -1,0 +1,64 @@
+﻿@model ResultContactVM
+<footer class="footer_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 footer-col">
+                <div class="footer_contact">
+                    <h4>
+                        Contact Us
+                    </h4>
+                    <div class="contact_link_box">
+                        <a href="@Model.Location">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span>
+                                Location
+                            </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>
+                                Call @Model.Phone
+                            </span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>
+                                @Model.Mail
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <div class="footer_detail">
+                    <a asp-controller="Default" asp-action="Index" class="footer-logo">
+                        @Model.FooterTitle
+                    </a>
+                    <p>
+                        @Model.FooterDescription
+                    </p>
+                    @await Component.InvokeAsync("_UILayoutFooterSocialMediaComponentPartial")
+                </div>
+            </div>
+            <div class="col-md-4 footer-col">
+                <h4>
+                    @Model.OpenDaysDescription
+                </h4>
+                <p>
+                    @Model.Opendays
+                </p>
+                <p>
+                    @Model.OpenHours
+                </p>
+            </div>
+        </div>
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="#">SignalR Restaurant</a><br><br>
+                &copy; <span id="displayYear"></span> Distributed By
+                <a href="#" target="_blank">SignalRAcademy</a>
+            </p>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,54 @@
+﻿@model UpdateSliderVM
+@{
+    ViewData["Title"] = "UpdateSlider";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Slider</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Slider Update</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="SliderID" type="text" class="form-control" id="sliderID" hidden>
+                            <div class="form-group">
+                                <label for="abouttitle">Title 1</label>
+                                <input asp-for="Title1" type="text" class="form-control" id="title1">
+                            </div>
+                            <div class="form-group">
+                                <label for="abouttitle">Title 2</label>
+                                <input asp-for="Title2" type="text" class="form-control" id="title2">
+                            </div>
+                            <div class="form-group">
+                                <label for="abouttitle">Title 3</label>
+                                <input asp-for="Title3" type="text" class="form-control" id="title3">
+                            </div>
+                            <div class="form-group">
+                                <label for="abouttitle">Descripton 1</label>
+                                <input asp-for="Description1" type="text" class="form-control" id="description1">
+                            </div>
+                            <div class="form-group">
+                                <label for="abouttitle">Descripton 2</label>
+                                <input asp-for="Description2" type="text" class="form-control" id="description2">
+                            </div>
+                            <div class="form-group">
+                                <label for="abouttitle">Descripton 3</label>
+                                <input asp-for="Description3" type="text" class="form-control" id="description3">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Slider" asp-action="UpdateSlider" class="btn btn-primary">Update Slider</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+

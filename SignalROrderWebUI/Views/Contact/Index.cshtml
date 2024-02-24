@@ -1,0 +1,64 @@
+﻿@model List<ResultContactVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+	int count = 0;
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Contact</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Contact List </div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							You can do proceesses for CONTACT from below. Just remember!.<strong> One </strong> line should be exist for integrity of theme.
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Location</th>
+									<th scope="col">Phone</th>
+									<th scope="col">Mail</th>
+									<th scope="col">Footer Description</th>
+									<th scope="col">Delete</th>
+									<th scope="col">Update</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									count++;
+									<tr>
+										<th>@count</th>
+										<td>@item.Location</td>
+										<td>@item.Phone</td>
+										<td>@item.Mail</td>
+										@if (item.FooterDescription.Count() > 20)
+										{
+											<td>@item.FooterDescription.Substring(0, 20)...</td>
+										}
+										else
+										{
+											<td>@item.FooterDescription</td>
+										}
+										<td><a class="btn btn-outline-danger" asp-controller="Contact" asp-action="DeleteContact" asp-route-id=@item.ContactID>Delete</a></td>
+										<td><a class="btn btn-outline-success" asp-controller="Contact" asp-action="UpdateContact" asp-route-id=@item.ContactID>Update</a></td>
+
+									</tr>
+								}
+
+							</tbody>
+						</table>
+						<a asp-controller="Contact" asp-action="CreateContact" class="btn btn-outline-primary">Add New Contact</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,55 @@
+﻿@model List<ResultAboutVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+	int count = 0;
+}
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">About</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">About List </div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							You can do proceesses for ABOUT from below. Just remember!.One about line should be exist.
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Title</th>
+									<th scope="col">Image Url</th>
+									<th scope="col">Description</th>
+									<th scope="col">Delete</th>
+									<th scope="col">Update</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									count++;
+									<tr>
+										<td>@count</td>
+										<td>@item.Title</td>
+										<td>@item.ImageUrl</td>
+										<td>@item.Description</td>
+										<td><a class="btn btn-outline-danger" asp-controller="About" asp-action="DeleteAbout" asp-route-id=@item.AboutID>Delete</a></td>
+										<td><a class="btn btn-outline-success" asp-controller="About" asp-action="UpdateAbout" asp-route-id=@item.AboutID>Update</a></td>
+
+									</tr>
+								}
+
+							</tbody>
+						</table>
+						<a asp-controller="About" asp-action="CreateAbout" class="btn btn-outline-primary">Add New About</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

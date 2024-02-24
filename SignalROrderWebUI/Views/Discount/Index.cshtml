@@ -1,0 +1,81 @@
+﻿@model List<ResultDiscountVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+    string statusTo = "";
+    string btnClass = "";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Discount</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Discount List </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            You can do proceesses for DISCOUNT of the DAY from below.Choose <strong>2</strong> discount for integrity of theme.
+                        </div>
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Image Url</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Change Status To</th>
+                                    <th scope="col">Delete</th>
+                                    <th scope="col">Update</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.Status == true)
+                                    {
+                                        statusTo = "Change Status to False";
+                                        btnClass = "btn btn-outline-warning";
+                                    }
+                                    else
+                                    {
+                                        statusTo = "Change Status to True";
+                                        btnClass = "btn btn-outline-info";
+                                    }
+                                    count++;
+                                    <tr>
+                                        <th>@count</th>
+                                        <td>@item.Title</td>
+                                        <td>@item.Amount</td>
+                                        <td>@item.Description</td>
+                                        <td>@item.ImageUrl</td>
+                                        <td>@item.Status</td>
+                                        @if (item.Status == true)
+                                        {
+                                            <td><a class="@btnClass" asp-controller="Discount" asp-action="ChangeStatusToFalse" asp-route-id=@item.DiscountID>@statusTo</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a class="@btnClass" asp-controller="Discount" asp-action="ChangeStatusToTrue" asp-route-id=@item.DiscountID>@statusTo</a></td>
+                                        }
+                                       
+                                        <td><a class="btn btn-outline-danger" asp-controller="Discount" asp-action="DeleteDiscount" asp-route-id=@item.DiscountID>Delete</a></td>
+                                        <td><a class="btn btn-outline-success" asp-controller="Discount" asp-action="UpdateDiscount" asp-route-id=@item.DiscountID>Update</a></td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <a asp-controller="Discount" asp-action="CreateDiscount" class="btn btn-outline-primary">Add New Discount</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

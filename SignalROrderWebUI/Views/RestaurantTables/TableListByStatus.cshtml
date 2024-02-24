@@ -1,0 +1,118 @@
+﻿@model List<ResultRestaurantTableVM>
+@{
+    ViewData["Title"] = "TableListByStatus";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+  
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+
+<div class="content">
+
+    <script type="text/javascript">
+
+        $(document).ready(() => {
+
+            var connection = new signalR.HubConnectionBuilder().withUrl("https://localhost:7260/SignalRHub").build();
+
+            $("#connstatus").text(connection.state);
+            //console.log(connection.state);
+
+            connection.start().then(() => {
+                $("#connstatus").text(" " + connection.state);
+
+                setInterval(() => {
+                    connection.invoke("SendTableStatusList");
+                }, 5000);    //  time = 1sn
+
+            }).catch((err) => { console.log(err) });
+
+            connection.on("ReceiveTableListByStatus", (value) => {
+                console.log(value);
+                $("#restauranttablelistall").empty();
+                let color = "";
+                let status = "";
+                let tablehtml = "";
+                $.each(value, (index, item) => {
+
+                    if (item.status == false) {
+                        color = "card card-stats card-danger";
+                        status = "EMPTY";
+                    }
+                    else {
+                        color = "card card-stats card-success";
+                        status = "IN USE";
+                    }
+
+                    //way-1
+
+                    $("#restauranttablelistall").append(
+                        `<div class="col-md-3" >\n` +
+                          `<div class="${color}">\n` +
+                            `<div class="card-body">\n` +
+                              `<div class="row">\n` +
+                                `<div class="col-5">\n` +
+                                  `<div class="icon-big text-center">\n` +
+                                    `<i class="la la-certificate"></i>\n` +
+                                  `</div>\n` +
+                                `</div>\n` +
+                                `<div class="col-7 d-flex align-items-center">\n` +
+                                  `<div class="numbers">\n` +
+                                    `<p class="card-category">${item.name}</p>\n` +
+                                    `<h4 class="card-title"> <i>${status}</i></h4>\n` +
+                                  `</div>\n` +
+                                `</div>\n` +
+                              `</div>\n` +
+                            `</div>\n` +
+                          `</div>\n` +
+                        `</div>\n`
+                    )
+
+                    //way-2
+
+                    tablehtml += `<div class="col-md-3">
+                                    <div class="${color}" 
+                                      <div class="card-body">
+                                        <div class="row">
+                                          <div class="col-5">
+                                            <div class="icon-big text-center">
+                                              <i class="la la-certificate"></i>
+                                            </div>
+                                          </div>
+                                          <div class="col-7 d-flex align-items-center">
+                                            <div class="numbers">
+                                              <p class="card-category">${item.name}</p>
+                                              <h4 class="card-title"> <i>${status}</i></h4>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>`
+
+
+                        });
+                
+                $("#restauranttablelistall2").html(tablehtml);
+
+            });           
+        });
+    </script>
+
+
+    <div class="container-fluid">
+        <h4 class="page-title">Instant Tables Status Page</h4>
+        <div class="row" id="restauranttablelistall">
+            
+        </div>
+
+        <div class="row" id="restauranttablelistall2">
+           
+        </div>
+        
+    </div>
+</div>

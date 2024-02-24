@@ -1,0 +1,54 @@
+﻿@model UpdateBookingVM
+@{
+    ViewData["Title"] = "UpdateBooking";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Booking</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Booking Update</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="BookingID" type="text" class="form-control" id="bookingid" hidden>
+                            <div class="form-group">
+                                <label for="bookingname">Booking Name</label>
+                                <input asp-for="Name" type="text" class="form-control" id="bookingname">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingphone">Booking Phone</label>
+                                <input asp-for="Phone" type="text" class="form-control" id="bookingphone">
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingmail">Booking Mail</label>
+                                <input asp-for="Mail" type="text" class="form-control" id="bookingmail"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingpersoncount">Booking Person Count</label>
+                                <input asp-for="PersonCount" type="text" class="form-control" id="bookingpersoncount" />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingpersoncount">Description</label>
+                                <input asp-for="Description" type="text" class="form-control" id="bookingpersoncount" />
+                            </div>
+                            <div class="form-group">
+                                <label for="bookingdate">Booking Date</label>
+                                <input asp-for="Date" type="date" class="form-control" id="bookingdate" />
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Booking" asp-action="UpdateBooking" class="btn btn-primary">Update Booking</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

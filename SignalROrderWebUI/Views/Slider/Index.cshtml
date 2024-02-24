@@ -1,0 +1,63 @@
+﻿@model List<ResultSliderVM>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/AdminLayout/Index.cshtml";
+	var count = 0;
+}
+
+<h1>Slider Index</h1>
+
+<div class="content">
+	<div class="container-fluid">
+		<h4 class="page-title">Slider</h4>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header">
+						<div class="card-title">Slider List </div>
+					</div>
+					<div class="card-body">
+						<div class="card-sub">
+							You can do proceesses for SLIDER from below. Just remember!.One SLIDER line should be exist for integrity of theme.
+						</div>
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Title1</th>
+									<th scope="col">Title2</th>
+									<th scope="col">Title3</th>
+									<th scope="col">Description1</th>
+									<th scope="col">Description2</th>
+									<th scope="col">Description3</th>
+									<th scope="col">Delete</th>
+									<th scope="col">Update</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach (var item in Model)
+								{
+									count++;
+									<tr>
+										<td>@count</td>
+										<td>@item.Title1</td>
+										<td>@item.Title2</td>
+										<td>@item.Title3</td>																				
+										<td>@item.Description1</td>										
+										<td>@item.Description2</td>										
+										<td>@item.Description3</td>																				
+										<td><a class="btn btn-outline-danger" asp-controller="Slider" asp-action="DeleteSlider" asp-route-id=@item.SliderID>Delete</a></td>
+										<td><a class="btn btn-outline-success" asp-controller="Slider" asp-action="UpdateSlider" asp-route-id=@item.SliderID>Update</a></td>
+
+									</tr>
+								}
+
+							</tbody>
+						</table>
+						<a asp-controller="Slider" asp-action="CreateSlider" class="btn btn-outline-primary">Add New Slider</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

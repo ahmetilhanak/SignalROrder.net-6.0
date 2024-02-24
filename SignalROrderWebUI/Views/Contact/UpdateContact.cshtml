@@ -1,0 +1,63 @@
+﻿@model UpdateContactVM
+@{
+    ViewData["Title"] = "UpdateContact";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Contact</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Update Contact</div>
+                        </div>
+                        <div class="card-body">
+                            <input asp-for="ContactID" type="text" class="form-control" id="contactid" hidden>
+                            <div class="form-group">
+                                <label for="contactlocation">Location</label>
+                                <input asp-for="Location" type="text" class="form-control" id="contactlocation">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactphone">Phone</label>
+                                <input asp-for="Phone" type="text" class="form-control" id="contactphone">
+                            </div>
+                            <div class="form-group">
+                                <label for="contactmail">Mail</label>
+                                <input asp-for="Mail" type="email" class="form-control" id="contactmail" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactmail">Footer Title</label>
+                                <input asp-for="FooterTitle" type="text" class="form-control" id="footertitle" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactmail">Open Days</label>
+                                <input asp-for="Opendays" type="text" class="form-control" id="opendays" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactmail">Open Days Description</label>
+                                <input asp-for="OpenDaysDescription" type="text" class="form-control" id="opendaysdescription" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactmail">Open Hours</label>
+                                <input asp-for="OpenHours" type="text" class="form-control" id="openhours" />
+                            </div>
+                            <div class="form-group">
+                                <label for="contactfooterdescription">Footer Description</label>
+                                <textarea asp-for="FooterDescription" type="text" class="form-control" id="contactfooterdescription"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="card-action">
+                            <button asp-controller="Contact" asp-action="UpdateContact" class="btn btn-primary">Update Contact</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
