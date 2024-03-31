@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\sqlBackup\" />
     <Folder Include="wwwroot\QRCoderDll\" />
   </ItemGroup>
 
